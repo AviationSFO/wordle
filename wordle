@@ -1,0 +1,2 @@
+#!/bin/sh
+lua ~/Desktop/wordle/main.lua
