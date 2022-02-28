@@ -1,6 +1,6 @@
 --[[
     Wordle Clone made with lua
-    By Steven Weinstein on 2-21-2022
+    By Steven Weinstein on 2-28-2022
 ]]
 
 local function noSpace(str)
@@ -12,7 +12,7 @@ os.execute("clear")
 -- reading available words from file
 local dir = os.getenv("PWD") or io.popen("cd"):read()
 dir = dir .. "/wordle/words.txt"
-print(dir)
+-- print(dir)
 local file = io.open(dir, "r")
 local words = {}
 local wrongchars = {}
@@ -70,7 +70,7 @@ end
 local function guessword()
     local guessing = true
     while guessing == true do
-        print("Enter your word:")
+        io.write("Enter your word: ")
         guess = io.read()
         guess = string.lower(guess)
         guess = noSpace(guess)
