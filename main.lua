@@ -1,6 +1,6 @@
 --[[
     Wordle Clone made with lua
-    By Steven Weinstein on 2-28-2022
+    By Steven Weinstein on 3-1-2022
 ]]
 
 local function noSpace(str)
@@ -11,12 +11,11 @@ os.execute("cd ~/Desktop")
 os.execute("clear")
 -- reading available words from file
 local dir = os.getenv("PWD") or io.popen("cd"):read()
-dir = dir .. "/wordle/words.txt"
--- print(dir)
-local file = io.open(dir, "r")
+print(dir)
+local file = io.open(dir .. "/wordle/words-guessable.txt", "r")
 local words = {}
 local wrongchars = {}
-for i = 1, 2315 do
+for i = 1, 12974 do
     words[#words+1] = file:read("*l")
     words[#words] = noSpace(words[#words])
 end
@@ -44,9 +43,14 @@ local function tablecontains(table, element)
   end
 -- generates random word as the one to guess
 local function generateword()
-    local randnum = math.random(1,2315)
-    local randword = words[randnum]
-    randword = string.gsub(randword, " ", "")
+    local file = io.open(dir .. "/wordle/words-answers.txt", "r")
+    local a = {}
+    for i = 1, 2316 do
+        a[#a+1] = file:read("*l")
+        a[#a] = noSpace(a[#a])
+    end
+    local randnum = math.random(1,2316)
+    local randword = noSpace(a[randnum])
     return randword
 end
 local correct_answer = generateword()
@@ -70,7 +74,7 @@ end
 local function guessword()
     local guessing = true
     while guessing == true do
-        io.write("Enter your word: ")
+        print("Enter your word:")
         guess = io.read()
         guess = string.lower(guess)
         guess = noSpace(guess)
@@ -190,7 +194,7 @@ end
 -- beinging of user interaction
 print("\nWelcome to wordle! Press enter to start.")
 io.read()
--- print(correct_answer)
+print(correct_answer)
 -- loop for guessing 6 times
 for round = 1, 6, 1 do
     correct = guessword()

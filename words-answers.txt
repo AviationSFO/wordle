@@ -1603,6 +1603,7 @@ river
 rivet
 roach
 roast
+roate
 robin
 robot
 rocky
