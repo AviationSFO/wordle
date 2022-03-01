@@ -11,7 +11,6 @@ os.execute("cd ~/Desktop")
 os.execute("clear")
 -- reading available words from file
 local dir = os.getenv("PWD") or io.popen("cd"):read()
-print(dir)
 local file = io.open(dir .. "/wordle/words-guessable.txt", "r")
 local words = {}
 local wrongchars = {}
@@ -27,7 +26,6 @@ print("Wordle created by Steven Weinstein Version v0.1dev.")
 local function split (inputstr)
     local t = {}
     local str = inputstr
-    
     for i=1, string.len(str) do
       t[i]= (string.sub(str,i,i))
     end
@@ -74,7 +72,7 @@ end
 local function guessword()
     local guessing = true
     while guessing == true do
-        print("Enter your word:")
+        io.write("Enter your word: ")
         guess = io.read()
         guess = string.lower(guess)
         guess = noSpace(guess)
