@@ -194,7 +194,7 @@ end
 -- beinging of user interaction
 print("\nWelcome to wordle! Press enter to start.")
 io.read()
-print(correct_answer)
+--print(correct_answer)
 -- loop for guessing 6 times
 for round = 1, 6, 1 do
     correct = guessword()
