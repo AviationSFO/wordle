@@ -20,7 +20,7 @@ for i = 1, 12974 do
 end
 file:close()
 -- opening statment
-print("Wordle created by Steven Weinstein Version v0.1dev.")
+print("Wordle created by Steven Weinstein Version v1.0.")
 
 -- defining reused functions as part of loading
 local function split (inputstr)
