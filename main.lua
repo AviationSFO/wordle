@@ -1,17 +1,18 @@
 --[[
     Wordle Clone made with lua
-    By Steven Weinstein on 3-1-2022
+    By Steven Weinstein on 3-10-2022
 ]]
 
 local function noSpace(str)
     local normalisedString = string.gsub(str, "%s+", "")
     return normalisedString
 end
+
 os.execute("cd ~/Desktop")
 os.execute("clear")
 -- reading available words from file
-local dir = os.getenv("PWD") or io.popen("cd"):read()
-local file = io.open(dir .. "/wordle/words-guessable.txt", "r")
+local dir = os.getenv("PWD") or io.popen("cd ~/Desktop"):read()
+local file = io.open(dir .. "/wordle/words-guessable.csv", "r")
 local words = {}
 local wrongchars = {}
 for i = 1, 12974 do
@@ -22,6 +23,7 @@ file:close()
 -- opening statment
 print("Wordle created by Steven Weinstein Version v1.0.")
 
+
 -- defining reused functions as part of loading
 local function split (inputstr)
     local t = {}
@@ -31,6 +33,8 @@ local function split (inputstr)
     end
     return t
 end
+
+
 local function tablecontains(table, element)
     for _, value in pairs(table) do
       if value == element then
@@ -38,10 +42,12 @@ local function tablecontains(table, element)
       end
     end
     return false
-  end
+end
+
+
 -- generates random word as the one to guess
 local function generateword()
-    local file = io.open(dir .. "/wordle/words-answers.txt", "r")
+    local file = io.open(dir .. "/wordle/words-answers.csv", "r")
     local a = {}
     for i = 1, 2316 do
         a[#a+1] = file:read("*l")
@@ -51,7 +57,11 @@ local function generateword()
     local randword = noSpace(a[randnum])
     return randword
 end
+
+
 local correct_answer = generateword()
+
+
 -- checks if word is allowed
 local function check_allowed(guess)
     local i = 1
@@ -80,7 +90,7 @@ local function guessword()
             guessing = false
             break
         else
-            print("Sorry, \'" .. guess .. "\' is not in the allowed words list. Please try agian!")   
+            print("Sorry, \'" .. guess .. "\' is not in the allowed words list. Please try agian!")
         end
     end
     -- now checking positional corectness
@@ -200,7 +210,9 @@ for round = 1, 6, 1 do
         break
     end
 end
+
 if correct ~= true then 
     print("You lost. The word was " .. correct_answer .. "!")
 end
+
 print("\027[0m")
