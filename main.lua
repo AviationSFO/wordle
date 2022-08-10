@@ -1,6 +1,6 @@
 --[[
     Wordle Clone made with lua
-    By Steven Weinstein on 3-10-2022
+    By Steven Weinstein on 8-9-2022
 ]]
 
 local function noSpace(str)
@@ -8,11 +8,22 @@ local function noSpace(str)
     return normalisedString
 end
 
-os.execute("cd ~/Desktop")
-os.execute("clear")
+-- os.execute("cd ~/Desktop")
+-- os.execute("clear")
 -- reading available words from file
-local dir = os.getenv("PWD") or io.popen("cd ~/Desktop"):read()
-local file = io.open(dir .. "/wordle/words-guessable.csv", "r")
+-- local dir = os.getenv("PWD") or io.popen("cd ~/Desktop"):read()
+
+local function script_path()
+    local str = debug.getinfo(2, "S").source:sub(2)
+    return str:match("(.*/)")
+end
+ 
+-- local dir = script_path()
+
+-- print(dir .. "/words-guessable.csv")
+
+local file = io.open("./words-guessable.csv", "r")
+
 local words = {}
 local wrongchars = {}
 for i = 1, 12974 do
@@ -21,7 +32,7 @@ for i = 1, 12974 do
 end
 file:close()
 -- opening statment
-print("Wordle created by Steven Weinstein Version v1.0.")
+print("Wordle created by Steven Weinstein Version v1.1")
 
 
 -- defining reused functions as part of loading
@@ -47,7 +58,7 @@ end
 
 -- generates random word as the one to guess
 local function generateword()
-    local file = io.open(dir .. "/wordle/words-answers.csv", "r")
+    local file = io.open("./words-answers.csv", "r")
     local a = {}
     for i = 1, 2316 do
         a[#a+1] = file:read("*l")
