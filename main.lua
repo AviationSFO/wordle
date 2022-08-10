@@ -22,7 +22,7 @@ end
 
 -- print(dir .. "/words-guessable.csv")
 
-local file = io.open("./words-guessable.csv", "r")
+local file = io.open("./wordle/words-guessable.csv", "r")
 
 local words = {}
 local wrongchars = {}
@@ -32,7 +32,7 @@ for i = 1, 12974 do
 end
 file:close()
 -- opening statment
-print("Wordle created by Steven Weinstein Version v1.1")
+print("Wordle created by Steven Weinstein Version v1.1 (CLIENT USE VERSION)")
 
 
 -- defining reused functions as part of loading
@@ -58,7 +58,7 @@ end
 
 -- generates random word as the one to guess
 local function generateword()
-    local file = io.open("./words-answers.csv", "r")
+    local file = io.open("./wordle/words-answers.csv", "r")
     local a = {}
     for i = 1, 2316 do
         a[#a+1] = file:read("*l")
